@@ -29,6 +29,12 @@ void concluir_tarefa(TFicha *ptr1, int indice_tarefa){
     }
 }
 
+// Função para deletar tarefa
+void destruir_tarefa(TFicha *ptr1, int indice_tarefa){
+    memset(ptr1->tarefas[indice_tarefa], 0, sizeof(tarefas[indice_tarefa]));
+    ptr1->concluido[indice_tarefa] = false;
+}
+
 /* Função para mostrar tarefa e aonde está dentro do array*/
 void imprimir_tarefas(TFicha *ptr1) {
     for (int i = 0; i < TAM; i++) {
@@ -44,7 +50,7 @@ void imprimir_tarefas(TFicha *ptr1) {
 int main() {
     TFicha *ptr1 = malloc(sizeof(TFicha));  // alocar memória para ptr1
 
-    if (ptr1 == NULL) {
+    if (ptr1 == NULL){
         printf("Erro: falha ao alocar memória.\n");
         exit(ptr1);
     }
