@@ -20,9 +20,9 @@ void tarefas(TFicha * ptr1){
     }
 }
 
-// Função para concluir tarefa ou colocar como n concluiada novamente
+// Função para concluir tarefa ou colocar como n concluida novamente
 void concluir_tarefa(TFicha *ptr1, int indice_tarefa){
-    if (ptr1->concluido[indice_tarefa] = true){
+    if (ptr1->concluido[indice_tarefa] == true){
         ptr1->concluido[indice_tarefa] = false;
     }else{
         ptr1->concluido[indice_tarefa] = true;
@@ -76,5 +76,3 @@ int main() {
 
     return 0;
 }
-
-
