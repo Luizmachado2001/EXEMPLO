@@ -81,7 +81,7 @@ int main() {
             break;
         case 4:
             imprimir_tarefas(ptr1);
-            printf("\nQual voce tarefa voce deseja deletar? [digite numero]: ");
+            printf("\nQual tarefa voce deseja deletar? [digite numero]: ");
             scanf("%d", &ana);
             deletar_tarefa(ptr1, ana);
             break;
