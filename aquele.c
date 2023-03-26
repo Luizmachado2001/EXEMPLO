@@ -20,9 +20,13 @@ void tarefas(TFicha * ptr1){
     }
 }
 
-// Função para concluir tarefa
+// Função para concluir tarefa ou colocar como n concluiada novamente
 void concluir_tarefa(TFicha *ptr1, int indice_tarefa){
-    ptr1->concluido[indice_tarefa] = true;
+    if (ptr1->concluido[indice_tarefa] = true){
+        ptr1->concluido[indice_tarefa] = false;
+    }else{
+        ptr1->concluido[indice_tarefa] = true;
+    }
 }
 
 /* Função para mostrar tarefa e aonde está dentro do array*/
@@ -58,7 +62,6 @@ int main() {
             imprimir_tarefas(ptr1);
             break;
         case 3:
-
             imprimir_tarefas(ptr1);
             printf("\nQual voce deseja concluir? [digite numero]: ");
             scanf("%d", &enviar);
