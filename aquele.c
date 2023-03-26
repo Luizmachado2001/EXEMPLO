@@ -9,6 +9,7 @@ typedef struct ficha_pessoal
 {
     char tarefas[TAM][100];
     bool concluido[TAM];
+    bool deletado[TAM];
 } TFicha;
 
 
@@ -30,19 +31,24 @@ void concluir_tarefa(TFicha *ptr1, int indice_tarefa){
 }
 
 // Função para deletar tarefa
-void destruir_tarefa(TFicha *ptr1, int indice_tarefa){
-    memset(ptr1->tarefas[indice_tarefa], 0, sizeof(tarefas[indice_tarefa]));
+void deletar_tarefa(TFicha *ptr1, int indice_tarefa){
+    ptr1->deletado[indice_tarefa] = true;
     ptr1->concluido[indice_tarefa] = false;
 }
 
-/* Função para mostrar tarefa e aonde está dentro do array*/
+// Função para imprimir tarefa.
 void imprimir_tarefas(TFicha *ptr1) {
     for (int i = 0; i < TAM; i++) {
-        printf("\n[Tarefa %d] %s\n", i, ptr1->tarefas[i]);
-        if (ptr1->concluido[i]) {
-            printf("(concluída)\n");
+        printf("\n[Tarefa %d] ", i);
+        if (ptr1->deletado[i]) {
+            printf("(tarefa deletada)\n");
         } else {
-            printf("não concluída)\n");
+            printf("%s ", ptr1->tarefas[i]);
+            if (ptr1->concluido[i]) {
+                printf("(concluída)\n");
+            } else {
+                printf("(não concluída)\n");
+            }
         }
     }
 }
@@ -54,12 +60,12 @@ int main() {
         printf("Erro: falha ao alocar memória.\n");
         exit(ptr1);
     }
-    int resp = 0, enviar = 0;
+    int resp = 0, enviar = 0, ana = 0;
     memset(ptr1->concluido, false, sizeof(ptr1->concluido)); // definir valores padrão do array como false
     tarefas(ptr1);
 
     do{
-        printf("\n----SISTEMA----\n\nDeseja imprimir suas tarefas? [2] \nDeseja Sair? [1]\nDeseja Concluir alguma tarefa?[3]\n\n");
+        printf("\n----SISTEMA----\n\nDeseja imprimir suas tarefas? [2] \nDeseja Sair? [1]\nDeseja Concluir alguma tarefa?[3]\nDeletar tarefa[4]\n\n");
         scanf("%d", &resp);   
         switch (resp){
         case 1:
@@ -72,6 +78,13 @@ int main() {
             printf("\nQual voce deseja concluir? [digite numero]: ");
             scanf("%d", &enviar);
             concluir_tarefa(ptr1, enviar);
+            break;
+        case 4:
+            imprimir_tarefas(ptr1);
+            printf("\nQual voce tarefa voce deseja deletar? [digite numero]: ");
+            scanf("%d", &ana);
+            deletar_tarefa(ptr1, ana);
+            break;
         default:
             printf("\nResposta incorreta!");
             break;
@@ -82,3 +95,5 @@ int main() {
 
     return 0;
 }
+
+
