@@ -56,6 +56,14 @@ void imprimir_tarefas(TFicha *ptr1) {
     }
 }
 
+// Função para deixar todos como não concluido  e não deletado.
+void inicializar_tudo(TFicha * ptr1){
+    for (int i = 0; i < TAM; i++) {
+        ptr1->concluido[i] = false;
+        ptr1->deletado[i] = false;
+    }
+}
+
 int main() {
     TFicha *ptr1 = malloc(sizeof(TFicha));  // alocar memória para ptr1
 
@@ -63,13 +71,9 @@ int main() {
         printf("Erro: falha ao alocar memória.\n");
         exit(ptr1);
     }
+    inicializar_tudo(ptr1); // função para deixar todos como não concluido e não deletados.
     int resp[2];
 
-    for (int i = 0; i < TAM; i++) {
-        ptr1->concluido[i] = false;
-        ptr1->deletado[i] = false;
-    }
-    
     tarefas(ptr1);
 
     do{
