@@ -63,14 +63,19 @@ int main() {
         printf("Erro: falha ao alocar memória.\n");
         exit(ptr1);
     }
-    int resp = 0, enviar = 0, ana = 0;
-    memset(ptr1->concluido, false, sizeof(ptr1->concluido)); // definir valores padrão do array como false
+    int resp[2];
+
+    for (int i = 0; i < TAM; i++) {
+        ptr1->concluido[i] = false;
+        ptr1->deletado[i] = false;
+    }
+    
     tarefas(ptr1);
 
     do{
         printf("\n----SISTEMA----\n\nDeseja imprimir suas tarefas? [2] \nDeseja Sair? [1]\nDeseja Concluir alguma tarefa?[3]\nDeletar tarefa[4]\n\n");
-        scanf("%d", &resp);   
-        switch (resp){
+        scanf("%d", &resp[0]);   
+        switch (resp[0]){
         case 1:
             break;
         case 2:
@@ -79,20 +84,20 @@ int main() {
         case 3:
             imprimir_tarefas(ptr1);
             printf("\nQual voce deseja concluir? [digite numero]: ");
-            scanf("%d", &enviar);
-            concluir_tarefa(ptr1, enviar);
+            scanf("%d", &resp[1]);
+            concluir_tarefa(ptr1, resp[1]);
             break;
         case 4:
             imprimir_tarefas(ptr1);
-            printf("\nQual voce tarefa voce deseja deletar? [digite numero]: ");
-            scanf("%d", &ana);
-            deletar_tarefa(ptr1, ana);
+            printf("\nQual tarefa voce deseja deletar? [digite numero]: ");
+            scanf("%d", &resp[1]);  // corrigir índice para resp[1]
+            deletar_tarefa(ptr1, resp[1]);
             break;
         default:
             printf("\nResposta incorreta!");
             break;
         }
-    }while (resp != 1);
+    }while (resp[0] != 1);
 
     free(ptr1);  // liberar a memória alocada para ptr1
 
