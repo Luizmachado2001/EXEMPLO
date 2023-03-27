@@ -18,6 +18,10 @@ void tarefas(TFicha * ptr1){
     for (int i = 0; i < TAM; i++) {
         printf("\n[%d] [Digite sua tarefa]\n", i);
         scanf(" %[^\n]", ptr1->tarefas[i]);  // ler uma linha completa de texto
+        if (strcmp(ptr1->tarefas[i], "") == 0){ // compara a string com uma string vazia
+            i--; // decrementa o contador para inserir novamente na mesma posição
+            printf("\nValor invalido\n");
+        }
     }
 }
 
@@ -39,11 +43,10 @@ void deletar_tarefa(TFicha *ptr1, int indice_tarefa){
 // Função para imprimir tarefa.
 void imprimir_tarefas(TFicha *ptr1) {
     for (int i = 0; i < TAM; i++) {
-        printf("\n[Tarefa %d] ", i);
         if (ptr1->deletado[i]) {
-            printf("(tarefa deletada)\n");
+            printf("\n[Tarefa %d] (tarefa deletada)\n", i);
         } else {
-            printf("%s ", ptr1->tarefas[i]);
+            printf("\n[Tarefa %d] %s ", i, ptr1->tarefas[i]);
             if (ptr1->concluido[i]) {
                 printf("(concluída)\n");
             } else {
@@ -81,7 +84,7 @@ int main() {
             break;
         case 4:
             imprimir_tarefas(ptr1);
-            printf("\nQual tarefa voce deseja deletar? [digite numero]: ");
+            printf("\nQual voce tarefa voce deseja deletar? [digite numero]: ");
             scanf("%d", &ana);
             deletar_tarefa(ptr1, ana);
             break;
